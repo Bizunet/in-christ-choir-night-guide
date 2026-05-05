@@ -63,9 +63,105 @@ function Moment({ time, title, description }: { time?: string; title: string; de
   );
 }
 
+type SongMatch = { song: Song; sessionNumber: number; sessionTitle: string };
+
 function Index() {
+  const [query, setQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const matches = useMemo<SongMatch[]>(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    const results: SongMatch[] = [];
+    for (const item of program) {
+      if (item.kind !== "session") continue;
+      for (const song of item.songs) {
+        const haystack = `${song.title} ${song.performer} ${song.lyrics}`.toLowerCase();
+        if (haystack.includes(q)) {
+          results.push({ song, sessionNumber: item.number, sessionTitle: item.title });
+        }
+      }
+    }
+    return results;
+  }, [query]);
+
   return (
     <main className="min-h-screen">
+      {/* Floating controls */}
+      <div className="fixed top-4 right-4 z-40 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setSearchOpen((o) => !o)}
+          aria-label="Search lyrics"
+          title="Search lyrics"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-gold/50 bg-card/70 backdrop-blur text-gold hover:bg-gold/10 transition-colors shadow-md"
+        >
+          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </button>
+        <ThemeToggle />
+      </div>
+
+      {/* Search overlay */}
+      {searchOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-start justify-center pt-20 px-4"
+          onClick={() => setSearchOpen(false)}
+        >
+          <div
+            className="w-full max-w-2xl paper-card rounded-2xl p-5 sm:p-7"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 border-b border-gold/30 pb-3">
+              <svg viewBox="0 0 24 24" className="w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                autoFocus
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="የመዝሙር ቃላት ፈልግ · Search title, singer, or lyrics…"
+                className="flex-1 bg-transparent outline-none text-base sm:text-lg text-foreground placeholder:text-muted-foreground"
+              />
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                className="text-muted-foreground hover:text-foreground text-sm"
+                aria-label="Close search"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mt-4 max-h-[60vh] overflow-y-auto space-y-3">
+              {!query.trim() && (
+                <p className="text-sm text-muted-foreground italic px-1 py-6 text-center">
+                  Type a word from a song title, performer, or lyric line.
+                </p>
+              )}
+              {query.trim() && matches.length === 0 && (
+                <p className="text-sm text-muted-foreground italic px-1 py-6 text-center">
+                  No matching songs found.
+                </p>
+              )}
+              {matches.map((m, i) => (
+                <div key={i} className="rounded-lg border border-gold/20 px-4 py-3 bg-background/50">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-gold/80">
+                    Session {m.sessionNumber} · {m.sessionTitle}
+                  </p>
+                  <h4 className="font-display text-xl text-primary mt-1">{m.song.title}</h4>
+                  <p className="text-xs text-muted-foreground">{m.song.performer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero */}
       <section className="relative px-5 pt-14 pb-20 sm:pt-20 sm:pb-28 text-center max-w-5xl mx-auto">
         <p className="font-display tracking-[0.5em] text-xs sm:text-sm text-gold uppercase mb-6">
@@ -93,15 +189,28 @@ function Index() {
           and meet the voice leading us into His presence.
         </p>
 
-        <a
-          href="#program"
-          className="inline-flex items-center gap-2 mt-10 px-7 py-3 rounded-full bg-primary text-primary-foreground font-medium shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all hover:-translate-y-0.5"
-        >
-          View the Program
-          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#program"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-primary text-primary-foreground font-medium shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all hover:-translate-y-0.5"
+          >
+            View the Program
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 5v14M5 12l7 7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-gold/60 text-foreground font-medium hover:bg-gold/10 transition-all"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            Search Lyrics
+          </button>
+        </div>
       </section>
 
       {/* Program */}
