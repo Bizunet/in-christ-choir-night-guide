@@ -54,6 +54,22 @@ export function SongCard({ index, song }: Props) {
             <div className="ornament-divider mb-5">
               <span className="text-xs uppercase tracking-[0.3em] text-gold/80">Lyrics</span>
             </div>
+
+            {song.audioUrl ? (
+              <audio
+                controls
+                preload="none"
+                src={song.audioUrl}
+                className="w-full mb-5"
+              >
+                Your browser does not support audio playback.
+              </audio>
+            ) : (
+              <p className="mb-5 text-xs italic text-muted-foreground/80 tracking-wide">
+                Audio will be available soon.
+              </p>
+            )}
+
             <pre className="whitespace-pre-wrap font-body text-base sm:text-lg leading-relaxed text-foreground/90">
 {song.lyrics}
             </pre>
