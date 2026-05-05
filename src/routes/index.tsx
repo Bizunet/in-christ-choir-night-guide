@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/bekrstos.png";
 import { program } from "@/data/program";
 import { SongCard } from "@/components/SongCard";
 
@@ -70,11 +70,13 @@ function Index() {
           A Choir Night of Worship
         </p>
 
-        <img
-          src={logo}
-          alt="በክርስቶስ — In Christ"
-          className="mx-auto w-[min(560px,85%)] h-auto select-none drop-shadow-[0_20px_40px_rgba(74,14,14,0.25)]"
-        />
+        <div className="mx-auto w-[min(320px,75%)] aspect-square rounded-full overflow-hidden border-4 border-gold/70 shadow-[0_25px_60px_-15px_rgba(74,14,14,0.55)] ring-8 ring-gold/10">
+          <img
+            src={logo}
+            alt="በክርስቶስ — In Christ"
+            className="w-full h-full object-cover select-none"
+          />
+        </div>
 
         <p className="mt-8 font-display italic text-xl sm:text-2xl text-primary/80 text-balance">
           “In Christ alone our hope is found.”
