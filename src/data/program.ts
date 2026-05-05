@@ -3,6 +3,8 @@ export type Song = {
   performer: string;
   role?: string;
   lyrics: string;
+  /** Optional audio URL (mp3, m4a, etc.) for playback alongside the lyrics. */
+  audioUrl?: string;
 };
 
 export type ProgramItem =
