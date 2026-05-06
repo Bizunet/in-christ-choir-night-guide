@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import logo from "@/assets/bekrstos.png";
 import { program, type Song } from "@/data/program";
-import { SongCard } from "@/components/SongCard";
+import { SongCard, slugifySong } from "@/components/SongCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/")({
