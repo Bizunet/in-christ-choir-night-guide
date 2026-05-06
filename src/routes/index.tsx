@@ -149,13 +149,24 @@ function Index() {
                 </p>
               )}
               {matches.map((m, i) => (
-                <div key={i} className="rounded-lg border border-gold/20 px-4 py-3 bg-background/50">
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => {
+                    const id = slugifySong(m.song.title);
+                    setSearchOpen(false);
+                    setTimeout(() => {
+                      window.dispatchEvent(new CustomEvent("open-song", { detail: id }));
+                    }, 100);
+                  }}
+                  className="w-full text-left rounded-lg border border-gold/20 px-4 py-3 bg-background/50 hover:bg-gold/10 transition-colors"
+                >
                   <p className="text-[10px] uppercase tracking-[0.3em] text-gold/80">
                     Session {m.sessionNumber} · {m.sessionTitle}
                   </p>
                   <h4 className="font-display text-xl text-primary mt-1">{m.song.title}</h4>
                   <p className="text-xs text-muted-foreground">{m.song.performer}</p>
-                </div>
+                </button>
               ))}
             </div>
           </div>
