@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Song } from "@/data/program";
 
 type Props = {
@@ -6,12 +6,32 @@ type Props = {
   song: Song;
 };
 
+export function slugifySong(title: string) {
+  return `song-${title.replace(/\s+/g, "-").replace(/[^\p{L}\p{N}-]/gu, "")}`;
+}
+
 export function SongCard({ index, song }: Props) {
   const [open, setOpen] = useState(false);
   const num = String(index + 1).padStart(2, "0");
+  const id = slugifySong(song.title);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (detail === id) {
+        setOpen(true);
+        setTimeout(() => {
+          ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
+    };
+    window.addEventListener("open-song", handler);
+    return () => window.removeEventListener("open-song", handler);
+  }, [id]);
 
   return (
-    <article className="paper-card rounded-xl overflow-hidden transition-all">
+    <article ref={ref} id={id} className="paper-card rounded-xl overflow-hidden transition-all scroll-mt-20">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
