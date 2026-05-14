@@ -174,12 +174,12 @@ function Index() {
       )}
 
       {/* Hero */}
-      <section className="relative px-5 pt-14 pb-20 sm:pt-20 sm:pb-28 text-center max-w-5xl mx-auto">
-        <p className="font-display tracking-[0.5em] text-xs sm:text-sm text-gold uppercase mb-6">
+      <section className="relative px-4 sm:px-5 pt-12 pb-16 sm:pt-20 sm:pb-28 text-center max-w-5xl mx-auto">
+        <p className="font-display tracking-[0.4em] sm:tracking-[0.5em] text-[10px] sm:text-sm text-gold uppercase mb-5 sm:mb-6">
           A Choir Night of Worship
         </p>
 
-        <div className="mx-auto w-[min(320px,75%)] aspect-square rounded-full overflow-hidden border-4 border-gold/70 shadow-[0_25px_60px_-15px_rgba(74,14,14,0.55)] ring-8 ring-gold/10">
+        <div className="mx-auto w-[min(280px,70%)] sm:w-[min(320px,75%)] aspect-square rounded-full overflow-hidden border-4 border-gold/70 shadow-[0_25px_60px_-15px_rgba(74,14,14,0.55)] ring-4 sm:ring-8 ring-gold/10 transition-transform duration-700 hover:scale-[1.02]">
           <img
             src={logo}
             alt="በክርስቶስ — In Christ"

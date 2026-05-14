@@ -31,30 +31,36 @@ export function SongCard({ index, song }: Props) {
   }, [id]);
 
   return (
-    <article ref={ref} id={id} className="paper-card rounded-xl overflow-hidden transition-all scroll-mt-20">
+    <article
+      ref={ref}
+      id={id}
+      className={`paper-card rounded-2xl overflow-hidden scroll-mt-20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/10 ${
+        open ? "ring-1 ring-gold/40 shadow-lg shadow-primary/10" : ""
+      }`}
+    >
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-full text-left px-5 py-5 sm:px-7 sm:py-6 flex items-center gap-5 group"
+        className="w-full text-left px-4 py-4 sm:px-7 sm:py-6 flex items-center gap-3 sm:gap-5 group"
         aria-expanded={open}
       >
-        <span className="font-display text-3xl sm:text-4xl text-gold tabular-nums shrink-0 w-12">
+        <span className="font-display text-2xl sm:text-4xl text-gold tabular-nums shrink-0 w-9 sm:w-12">
           {num}
         </span>
 
         <div className="flex-1 min-w-0">
-          <h3 className="text-xl sm:text-2xl font-semibold text-foreground leading-tight">
+          <h3 className="text-lg sm:text-2xl font-semibold text-foreground leading-tight break-words">
             {song.title}
           </h3>
-          <p className="mt-1 text-sm sm:text-base text-muted-foreground">
+          <p className="mt-1 text-xs sm:text-base text-muted-foreground">
             <span className="text-primary/80 font-medium">{song.performer}</span>
             {song.role && <span className="text-muted-foreground"> · {song.role}</span>}
           </p>
         </div>
 
         <span
-          className={`shrink-0 w-9 h-9 rounded-full border border-gold/50 flex items-center justify-center text-gold transition-transform duration-300 ${
-            open ? "rotate-45 bg-gold/10" : "group-hover:bg-gold/10"
+          className={`shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-gold/50 flex items-center justify-center text-gold transition-all duration-300 ${
+            open ? "rotate-45 bg-gold/15 scale-110" : "group-hover:bg-gold/10 group-hover:scale-105"
           }`}
           aria-hidden
         >
@@ -70,16 +76,37 @@ export function SongCard({ index, song }: Props) {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="px-5 sm:px-7 pb-7 pt-1">
-            <div className="ornament-divider mb-5">
-              <span className="text-xs uppercase tracking-[0.3em] text-gold/80">Lyrics</span>
+          <div className="px-4 sm:px-7 pb-6 sm:pb-7 pt-1">
+            <div className="ornament-divider mb-4 sm:mb-5">
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-gold/80">Lyrics</span>
             </div>
-            <pre className="whitespace-pre-wrap font-body text-base sm:text-lg leading-relaxed text-foreground/90">
+            <pre className="whitespace-pre-wrap font-body text-sm sm:text-lg leading-relaxed text-foreground/90">
 {song.lyrics}
             </pre>
+            <div className="mt-6 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.3em] text-gold/90 hover:text-gold transition-colors"
+              >
+                <span aria-hidden>▲</span> Hide lyrics
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {!open && (
+        <div className="px-4 sm:px-7 pb-4 -mt-2">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="w-full text-center text-xs sm:text-sm uppercase tracking-[0.3em] text-gold/80 hover:text-gold transition-colors py-1"
+          >
+            View lyrics ▾
+          </button>
+        </div>
+      )}
     </article>
   );
 }
