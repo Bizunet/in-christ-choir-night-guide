@@ -11,7 +11,8 @@ export type ProgramItem =
   | { kind: "moment"; time?: string; title: string; description?: string }
   | { kind: "session"; number: number; title: string; songs: Song[] };
 
-const minimBhon = `ያንን ጠያፉን ሕይወት
+const minimBhon = `
+ያንን ጠያፉን ሕይወት
 ውበትን ጨምሮበት
 ሳላውቅ ባለማመን ስላደረኩት
 አገኘሁ ምህረት (2x)
@@ -592,12 +593,77 @@ const adanegn = `አዝ፦ አዳነኝ በፀጋው አመሰግናለሁ
 
 አዝ፦ አዳነኝ በፀጋው ...
 
-አሃ (4x)`;
+አሃ (4x)
+
+የከፍታ ዘመን የብርሃን ሕይወት
+የሚጨምር ሰላም የሚጨምር ደስታ
+የክብር ዘመን ነው ከፊቴ ያለው
+መልካሙን አዋጅ እኔ አውጃለው
+
+ጨለማው አልፎ ያለቀስኩበት
+ዛሬ ብርሃን ሆንዋል ኧረ በእኔስ ሕይወት
+አለም ሁሉ ይስማ ይህን ይወቅልኝ
+ምክንያቱም ይሄ ነው ኢየሱስ ስላለኝ
+
+ኢየሱስ አንተን በማመኔ (3x)
+ኢየሱስ አንተን በማመኔ (3x)
+ባርነቴ ቀርቶ ወራሽ ሆንኩ እኔ
+
+ወራሽ ሆኛለው ወራሽ ሆኛለው (2x)
+ወራሽ ሆኛለው ወራሽ ሆኛለው አሄ
+ወራሽ ሆኛለሁ ልጅህ ሆኛለሁ
+ይኸው በደስታ አንተን አመልካለው
+
+ስላምና ደስታ ዕረፍት ሆነ ቤቴ
+መዳኔ ዕውን ሆነ ሳስገባው ወደ ቤቴ
+ነፃነቴን ላውጅ ከግዞት መውጣቴን
+በብርሃን አለም ከአንተ ጋር መሆኔን
+ከእንግዲ ጨለማ በእኔ ሕይወት የለም
+ሞት መውጊይው ተሰብርዋል እኔን አይነካኝም
+እርግማኔን ሽረህ ፅድቅን አለበስከኝ
+በማመኔ ብቻ ወራሽ አደረከኝ
+
+ኢየሱስ አንተን በማመኔ (3x)
+ኢየሱስ አንተን በማመኔ (3x)
+ባርነቴ ቀርቶ ወራሽ ሆንኩ እኔ
+
+ይሁንልህ ምሥጋና ይሁንልህ ዝማሬ
+ይሁንልህ አምልኮ ይሁንልህ ጌታዬ (2x)
+
+ከሞት ድኛለሁና ከሞት ድኛለሁና ከሞት
+ከሞት ድኛለሁና ላንተ ምስጋና
+
+የደም ነው ኪዳኑ የተሳሰርንበት
+ከፍሎልኛል ዋጋ ያንድ ልጁን ህይወት
+ሆኖኛል አባቴ እኔም ደግሞ ልጁ
+ወራሽ አድርጎኛል የሰማይ የምድሩ
+
+የክብር የከፍታ የደስታ መሆኑን
+አረጋግጫለው የቀረው ዘመኔን
+ድል በነሳው የሱስ ድልን ስላገኘው
+ከንግዲህ ህይወቴ ላንተ መዘመር ነው
+
+ባንተ ታሰበ የዘላለሜ ቀረ ባርነት ነፃ ሆንኩ እኔ
+ዛሬ በደስታ እዘምራለው የሰማይ ዜጋ ወራሽ ሆኛለው
+
+ወራሽ ሆኛለው ወራሽ ሆኛለው (2x)
+ወራሽ ሆኛለው ወራሽ ሆኛለው አሄ
+ወራሽ ሆኛለሁ ልጅህ ሆኛለሁ
+ይኸው በደስታ አንተን አመልካለው
+
+ይሁንልህ ምስጋና ይሁንልህ ዝማሬ
+ይሁንልህ አምልኮ ይሁንልህ ጌታዬ
+ይሁንልህ ዕልልታ (3x) ይሁንልህ ለጌታ
+ይሁንልህ ምሥጋና ይሁንልህ ዝማሬ
+ይሁንልህ አምልኮ ይሁንልህ ላምላኬ
+
+ከሞት ድኛለሁና ከሞት ድኛለሁና ከሞት
+ከሞት ድኛለሁና ላንተ ምስጋና`;
 
 export const program: ProgramItem[] = [
   {
     kind: "moment",
-    time: "12:00",
+    time: "12:15 PM",
     title: "የጸሎት ጊዜ · Opening Prayer",
     description: "የምሽቱን አምልኮ በጸሎት እንጀምራለን።",
   },
@@ -614,22 +680,22 @@ export const program: ProgramItem[] = [
   {
     kind: "moment",
     title: "Announcements · ማስታወቂያ",
-    description: "አጭር የማስታወቂያ ጊዜ።",
+    
   },
   {
     kind: "session",
     number: 2,
     title: "Session Two",
     songs: [
-      { title: "ሕይወት አግኝቻለሁ", performer: "Isayas", role: "Choir · Lead Singer", lyrics: hiwet },
+      { title: "ሕይወት አግኝቻለሁ", performer: "Bereketab Aychewu", role: "Choir song", lyrics: hiwet },
       { title: "ኢየሱስ ከፍሎታል", performer: "Acoustic Worship", role: "Acoustic Set", lyrics: yesusKefloal },
-      { title: "ከወርቅ በበለጠ", performer: "Yonatan", role: "Lead Singer", lyrics: kewerk },
-      { title: "አመለጠች በራ", performer: "Ermiyas Fantu & Tsion", role: "Lead Singers", lyrics: ameleteh },
+      { title: "ከወርቅ በበለጠ", performer: "Yonatan Deribe", role: "Lead Singer", lyrics: kewerk },
+      { title: "አመለጠች በራ", performer: "Ermiyas Fantu", role: "Lead Singers", lyrics: ameleteh },
     ],
   },
   {
     kind: "moment",
-    title: "የስብከት ጊዜ · The Word",
+    title: "SERMON  with Pastor sami",
     description: "ቃሉን የምንሰማበት ጊዜ።",
   },
   {
@@ -638,14 +704,14 @@ export const program: ProgramItem[] = [
     title: "Session Three",
     songs: [
       { title: "በክርስቶስ", performer: "Zerubabel Kapo", role: "Lead Singer", lyrics: bekrstos },
-      { title: "ድንቅ ነዉ", performer: "Bereketab Aychewu", role: "Lead Singer", lyrics: dnknew },
+      { title: "ድንቅ ነዉ", performer: "Tsion Hailu", role: "Lead Singer", lyrics: dnknew },
       { title: "ተፈጸመ", performer: "Feven Endale", role: "Lead Singer", lyrics: tefetseme },
-      { title: "አዳነኝ በጸጋዉ", performer: "To be announced", role: "Lead Singer", lyrics: adanegn },
+      { title: "አዳነኝ በጸጋዉ", performer: "Ephrata Tsegaye", role: "Lead Singer", lyrics: adanegn },
     ],
   },
   {
     kind: "moment",
     title: "የመዝጊያ ጸሎት · Closing Prayer",
-    description: "በጸሎት እንሰናበታለን።",
+    description: "MAY GOD BLESS YOU ALL! እግዚአብሔር ይባርካችሁ!",
   },
 ];
